@@ -43,4 +43,5 @@ This will [clone](https://www.atlassian.com/git/tutorials/setting-up-a-repositor
 For example, I would type `git push origin deep`.
 - **So whenever you feel that you've reached a checkpoint, type the four commands above. And you're good to go.**
 - **MOST IMPORTANTLY, NEVER PUSH TO SOMEONE ELSE'S BRANCH. IF NECESSARY, TYPE `git branch` BEFORE ADDING YOUR CHANGES**. If you're on a diffrent branch (unlikely), type `git checkout <your-branch-name>` to switch to your branch.
+- Check out [this](https://asciinema.org/a/5fugh8p6pvg4wy1jut27tgooe?speed=2) tiny video as well. It'll help you understand things better!
 > All the best guys. And Happy Coding!!
