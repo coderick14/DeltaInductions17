@@ -1,6 +1,6 @@
-### Delta Inductions 2017
+### Delta Inductions 2018
 ---
-> Welcome to Delta Inductions 2017.
+> Welcome to Delta Inductions 2018.
 
 Hi. I'm Deep. :)
 All the code that you have written or will write during the induction process should be pushed to **this repository**.
@@ -14,13 +14,20 @@ Here are a few tips to get you started.
 - Now type the following two commands. (*If you've already executed these commands before, there's no need to do it again*)  
 `git config --global user.email <your-email-here>`  
 `git config --global user.name <your-github-handle>`
-- Now go to directory/folder where you want to keep your code. Check out the example below.
-`cd ~/Documents/Code` or `cd ~/Desktop/MyFolder/`
-On Windows, you can open the folder in File Explorer, and open *Git Bash* right there (by right clicking).
-- Type `git clone https://github.com/coderick14/DeltaInductions17`
-This will clone this repository in your system.
-- Type `cd DeltaInductions17`
-- What I'm about to say now is **REALLY IMPORTANT**. *Git* is a version control system. So that you can maintain different versions of your code/project. Now, all of you will submit different codes for the same task(s). Thus, we will have different versions of the same task(s). *Git* uses **branches** to maintain versions. So, each one of us will have a different branch here.
+- Now go to directory/folder where you want to keep your code. Check out the example below.  
+```
+cd ~/Documents/Code
+```
+or 
+```
+cd ~/Desktop/MyFolder/
+```
+On Windows, you can open the folder in **File Explorer**, and open *Git Bash* right there (by right clicking).
+- Type `git clone https://github.com/coderick14/DeltaInductions18`
+This will [clone](https://www.atlassian.com/git/tutorials/setting-up-a-repository/git-clone) this repository in your system.
+- Type `cd DeltaInductions18`
+---
+- What I'm about to say now is **REALLY IMPORTANT**. *Git* is a version control system. So that you can maintain different versions of your code/project. Now, all of you will submit different codes for the same task(s). Thus, we will have different versions of the same task(s). *Git* uses **branches** to maintain versions. So, each one of us will have a different [branch](https://www.atlassian.com/git/tutorials/using-branches) here.
 - The default branch is `master`. To create your own branch, type `git checkout -b <your-branch-name>`. For example, I'll type `git checkout -b deep`.
 - **Awesome**. So now you're in your branch. At any point of time, you can check your current branch by typing `git branch`.
 - Organize your tasks into subfolders i.e. Task1, Task2 ...
