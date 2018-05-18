@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>DELTA INDUCTIONS'18</title>
+<img src="delta.jpeg" width="40px" height="40px">
+<span style="font-size:30px">DELTA INDUCTIONS'18</span>
+</head>
+<style>
+ span{
+text-align:center;
+}
+body{
+background-color:#222;
+color:#ddd;
+font-family: Helvetica,Arial,sans-serif;
+}
+table th,td{
+border:1px white;
+border-left:1em solid transparent;
+border-right:1em solid transparent;
+text-align:center;
+border:10;
+width:125px;
+cell padding:7;
+cell spacing:10;
+}
+div button{
+align:center;
+background:#0f82af;
+border:none;
+font-size:16px;
+padding:7px 15px;
+text-align:center;
+border-radius:4px;
+display:inline-block;
+}
+@media only screen and (min-device-width:320px)and(max-device-width:480px){
+body{
+background-color:black;
+width:50%;
+}
+}
+</style>
+<body>
+<br>
+<br>
+<p>The assossciated mentees and their performances are as follows :</p> 
+<br>
+<table align="center">
+<thead>
+<tr>
+<th><b>Name</b></th>
+<th><b>Rating</b></th>
+<th><b>Comments</th>
+</tr>
+</thead>
+<tbody id="mlist">
+</tbody>
+</table>
+
+<br>
+<br>
+<div>
+<button onclick="location.href='menteesupd.html'">Add</button>
+<button onclick="msort();location.href='mentees.html'">Sort</button>
+</div>
+
+<script type="text/javascript">
+var p=location.search.substring(1).split("&");
+var temp=p[0].split("=");
+var t=document.getElementById("mlist");
+var m1,cell,t1="",k="";
+var b1=[],b2=[],b3=[];
+
+function disp(){
+if(localStorage&&localStorage["mname"]!==undefined){
+b1=JSON.parse(localStorage.getItem("mname"));
+b2=JSON.parse(localStorage.getItem("mratn"));
+b3=JSON.parse(localStorage.getItem("commns"));
+for(var a=0;a<b1.length;a++){
+var r=t.insertRow(a);
+for(var x=0;x<3;x++){
+cell=r.insertCell(x);
+if(x===0)
+ cell.innerHTML=b1[a];
+else if(x===1)
+ cell.innerHTML=b2[a];
+else if(x===2)
+ cell.innerHTML=b3[a];
+}
+if(b2[a]<3)
+r.style.backgroundColor="red";
+else if(b2[a]==3)
+r.style.backgroundColor="#CCCC00";
+else
+r.style.backgroundColor="green";
+}
+}
+}
+function stor(k,x){
+if(localStorage.length<3){
+if(x===0){
+b1.push(k);
+localStorage.setItem("mname",JSON.stringify(b1));
+}
+else if(x===1){
+b2.push(k);
+localStorage.setItem("mratn",JSON.stringify(b2));
+}
+else if(x===2){
+b3.push(k);
+localStorage.setItem("commns",JSON.stringify(b3));
+}
+}
+else{
+if(x===0){
+b1=JSON.parse(localStorage.getItem("mname"));
+b1.push(k);
+localStorage.setItem("mname", JSON.stringify(b1));
+}
+else if(x===1){
+b2=JSON.parse(localStorage.getItem("mratn"));
+b2.push(k);
+localStorage.setItem("mratn", JSON.stringify(b2));
+}
+else if(x===2){
+b3=JSON.parse(localStorage.getItem("commns"));
+b3.push(k);
+localStorage.setItem("commns", JSON.stringify(b3));
+}
+}
+}
+for(var x=0;x<3;x++){
+k=unescape(temp[1]);
+if(k!="undefined"&&k!=""){
+if(x!==2)
+temp=p[x+1].split("=");
+if(localStorage.length<3)
+stor(k,x);
+else{
+b1=JSON.parse(localStorage.getItem("mname"));
+console.log(b1[b1.length-1]);
+console.log(k);
+if(!k.localeCompare(b1[b1.length-1]))
+break;
+else
+stor(k,x);
+}
+}
+}
+function msort(){
+if(localStorage.length<3)
+alert("No Items to Sort");
+else{
+b1=JSON.parse(localStorage.getItem("mname"));
+b2=JSON.parse(localStorage.getItem("mratn"));
+b3=JSON.parse(localStorage.getItem("commns"));
+var l=0;
+var r=b2.length-1;
+function swap(b,l,r){
+var temp=b[l];
+b[l]=b[r];
+b[r]=temp;
+temp=b1[l].slice(0);
+b1[l]=b1[r].slice(0);
+b1[r]=temp.slice(0);
+temp=b3[l].slice(0);
+b3[l]=b3[r].slice(0);
+b3[r]=temp.slice(0);
+}
+function patn(k,l,r){
+var pivot=k[Math.floor((l+r)/2)];
+var i=l;
+var j=r;
+while(i<=j){
+while(k[i]<pivot)
+i++;
+while(k[j]>pivot)
+j--;
+if(i<=j){
+swap(k,i,j);
+i++;
+j--;
+}
+}
+return i;
+}
+function quicksort(k,l,r){
+var index;
+index=patn(k,l,r);
+if(l<index-1)
+quicksort(k,l,index-1);
+if(index<r)
+quicksort(k,index,r);
+}
+quicksort(b2,l,r);
+localStorage.setItem("mname",JSON.stringify(b1));
+localStorage.setItem("mratn",JSON.stringify(b2));
+localStorage.setItem("commns",JSON.stringify(b3));
+var t=document.getElementById("mlist");
+}
+}
+disp();
+</script>
+<p><br><br>Edit or Delete a value over here<br><br></p>
+<p id="edit">
+<label for="name">Name:   </label>
+<input type="text" id="ename">
+<br>
+<label for="ratn">Rating:   </label>
+<input type="number" min="1" max="5" id="eratin">
+<br>
+<label for="commns">Comments:</label>
+<textarea id="ecomns"></textarea>
+<br>
+<button onclick="medit();location.href='mentees.html'">OK</button>
+</p>
+<p id="delfor">
+<label>Name:</label>
+<input type="text" id="dname">
+<button onclick="mdelete();location.href='mentees.html'">OK</button>
+</p>
+<div>
+<button id="q1" onclick="eshow()">Edit</button>
+<button id="q2" onclick="dshow()">Delete</button>
+</div>
+<script>
+"use strict";
+var e=document.getElementById("delfor")
+e.style.display="none";
+e=document.getElementById("edit")
+e.style.display="none";
+
+function medit(){
+var name=document.getElementById("ename").value;
+var b1=[],b2=[],b3=[];
+b1=JSON.parse(localStorage.getItem("mname"));
+b2=JSON.parse(localStorage.getItem("mratn"));
+b3=JSON.parse(localStorage.getItem("commns"));
+if(name.length===0||localStorage.length<3)
+alert("Please Enter a value or There is no value to edit");
+else{
+for(var a=0;a<b1.length;a++){
+if(!b1[a].localeCompare(name)){
+var a1,temp="";
+temp=document.getElementById("ecomns").value;
+b1[a]=name.slice(0);
+a1=document.getElementById("eratin").value;
+console.log(a1);
+b2[a]=a1;
+console.log(temp);
+b3[a]=temp.slice(0);
+localStorage.setItem("mname",JSON.stringify(b1));
+localStorage.setItem("mratn",JSON.stringify(b2));
+localStorage.setItem("commns",JSON.stringify(b3));
+break;
+}
+}
+if(a===b1.length)
+alert("Element not found");
+}
+}
+function dshow(){
+document.getElementById("delfor").style.display="block";
+document.getElementById("q1").style.display="none";
+}
+function eshow(){
+document.getElementById("edit").style.display="block";
+document.getElementById("q2").style.display="none";
+}
+function mdelete(){
+var name=document.getElementById("dname").value;
+b1=JSON.parse(localStorage.getItem("mname"));
+b2=JSON.parse(localStorage.getItem("mratn"));
+b3=JSON.parse(localStorage.getItem("commns"));
+var temp,a=0;
+if(name.length===0||localStorage.length<3)
+alert("Please Enter a value or There is no value to delete");
+else{
+while(a<b1.length){
+if(!b1[a].localeCompare(name))
+{temp=a;
+break;
+}
+a++;
+}
+console.log(temp);
+if(temp==undefined)
+alert("Element not found");
+else{
+for(var a=temp;a<b1.length-1;a++){
+b1[a]=b1[a+1].slice(0);
+b2[a]=b2[a+1].slice(0);
+b3[a]=b3[a+1].slice(0);
+}
+b1.pop();
+b2.pop();
+b3.pop();
+localStorage.setItem("mname",JSON.stringify(b1));
+localStorage.setItem("mratn",JSON.stringify(b2));
+localStorage.setItem("commns",JSON.stringify(b3));
+}
+}
+}
+</script>
+
+</body>
+<tail>
+<div style="position: relative;background-color:#222; width: 600px; height: 800px;">    
+
+    <div style="position: absolute; bottom: 5px; background-color: green">
+    Created By:KSR
+    </div>
+</div>
+</tail>
+</html>
+

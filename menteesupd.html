@@ -1,0 +1,52 @@
+<!DOCTYPEhtml>
+<html>
+<head>
+<meta charset="utf-8"/>
+<img src="delta.jpeg" width="40px" height="40px">
+<span style="font-size:30px">DELTA INDUCTIONS'18</span>
+</head>
+<body>
+<style>
+body{
+background-color:#222;
+color:#ddd;
+font-family: Helvetica,Arial,sans-serif;
+}
+form input#btn{
+align:center;
+background:#0f82af;
+border:none;
+font-size:16px;
+padding:7px 15px;
+text-align:center;
+border-radius:4px;
+}
+</style>
+<p><br><br><br>
+Enter the details of mentees over here:
+<br><br><br>
+</p>
+<form action="mentees.html" align="center" id="mdata" method="get">
+<div>
+<label for="name"><br>Name:</label>
+<input type="text" id="name" name="mname">
+</div>
+<div>
+<label for="rating"><br>Rating:</label>
+<input type="number" min="1" max="5" id="rating" name="mratn">
+</div>
+<div>
+<label for="comments"><br>Comments:</label>
+<textarea id="comments" name="comns"></textarea>
+</div>
+<br>
+<input type="submit" value="Submit" id="btn" onClick="store()">
+<input type="reset" value="Reset" id="btn">
+</form>
+<script type="text/javascript">
+function store(){
+alert("List updated successfully");
+}
+</script>
+</body>
+</html>
