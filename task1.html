@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Menteeees..</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="task1.css">
+</head>
+<body class="body">
+	<header class="header"> RATE AND MANAGE YOUR MENTEES PROFILE </header>
+
+	<div class="sort"><button class="BtnSort" onclick="location.href='sort.html'">SORT</button></div>
+	<div class="add"><button class="BtnSort" onclick="add()">ADD</button></div>
+
+	<div style="display: none;" id="div_input_form"><br><br><br>
+
+		<form id="input_form">
+			<div class="NamE"><input type="text" id="input_name" name="name" placeholder="name" style="font-family: cursive;font-size: 20px; width: 50%;color: #8e00ba; background-color: #eac78f; border: 2px solid black;"></div>
+			<div class="RoLL"><input type="text" id="input_rollno" name="RollNo" placeholder="Roll no" style="font-family: cursive;font-size: 20px; width: 50%; color: #8e00ba; background-color: #eac78f;border: 2px solid black; "></div>
+			<div class="CoMMent"><textarea placeholder="Comment" id="input_comment"  cols="20" style="font-family: cursive;font-size: 20px; width: 100%;color: #8e00ba; background-color: #eac78f; border: 2px solid black;"></textarea></div>
+			<div class="RAting"><input type="text" name="Rating" id="input_rating" placeholder="Rating" style="font-family: cursive;font-size: 20px; width: 50%;color: #8e00ba; background-color: #eac78f; border: 2px solid black;"></div>
+			<div class="CN"><input type="text" name="Contact_no" id="input_CN" placeholder="Contact Number" style="font-family: cursive;font-size: 20px; width: 50%;color: #8e00ba; background-color: #eac78f; border: 2px solid black;"></div>
+			
+		</form>
+
+		
+	</div>
+
+	<button class="BtnSort" id="Submit" onclick="submit()" >SUBMIT</button>
+    <!-- as on calling submit() inside button submit, whole div tag = din_input_form is getting display as none.. therefore I've keep it seperately. -->
+
+	<div id="mentees_block"></div>
+
+	<script type="text/javascript">
+
+
+		var id_number = 0;
+		
+		function add(){
+	document.getElementById("div_input_form").style.display= "block";
+	document.getElementById("input_name").value = "";
+	document.getElementById("input_comment").value = "";
+	document.getElementById("input_rating").value = "";
+	document.getElementById("input_rollno").value = "";
+	document.getElementById("input_CN").value = "";
+
+}
+
+
+function submit(){
+	   
+       var ManteeData = "<div id= '+id_number' style='background-color: BackColor()' class='ManDat'>"+"<p style='color:black; font-size:30px'>"+"Name: "+ document.getElementById("input_name").value+"</p>" +"<p style='color:black; font-size:30px'>"+"Roll Number: "+ document.getElementById("input_rollno").value+"</p>" +"<p style='color:black; font-size:30px'>"+"Comments: "+ document.getElementById("input_comment").value+"</p>" + "<p style='color:black; font-size:30px'>"+"Rating: "+ document.getElementById("input_rating").value+"</p>" + "<p style='color:black; font-size:30px'>"+"Contact Number: "+ document.getElementById("input_CN").value+"</p>"+"<button class='EnDbtn' onclick = del() >DELETE</button>"+"     " +"<button class='EnDbtn' onclick = edit() >EDIT</button>" +"</div>";
+
+	document.getElementById("mentees_block").innerHTML += ManteeData;
+	document.getElementById("div_input_form").style.display = 'none';
+
+
+    
+}
+/*for 'Mentee boxes should be in a compact form at first, displaying only the name and rating. When clicked, the mentee box should expand revealing all details. When another mentee box is clicked the first one collapses and the new one expands.' we will display name and rating initially, add k() to onclick event to ManteeData div tag.., ondblclick ==> j()
+k(){
+	display whole roll no, comments etc , by creating another var, div tag same as ManteeData and mantees_block
+}
+j(){
+	make the display of new created tag(in k()) to
+ }
+
+*/ 
+
+
+function del(){
+	// storage.removeItem() will be used for removing,
+	// and we will select that particular id_number for selecting the tag and make its display to none 
+
+}
+function edit(){
+   // storage.setItem() will be used for editing,
+   // and we will change the values of input
+}
+function BackColor(){
+	var rat = document.getElementById("input_rating").value;
+	var col;
+	if (0<=rat<1)
+	{
+		col ='#a30000';
+	}
+	if (1<=rat<2)
+	{
+		col ='#bf1e1e';
+	}
+	if (2<=rat<3)
+	{
+		col ='#c44646';
+	}
+	if (3<=rat<4)
+	{
+		col ='#dd7c7c';
+	}if (4<=rat<5)
+	{
+		col ='#efaeae';
+	}
+	if (5<=rat<6)
+	{
+		col ='#9dea9e';
+	}
+	if (6<=rat<7)
+	{
+		col ='#3bc63e';
+	}
+	if (7<=rat<8)
+	{
+		col ='#01b205';
+	}
+	if (8<=rat<9)
+	{
+		col ='#009403';
+	}
+	if (9<=rat<10)
+	{
+		col ='#008403';
+	}
+	if (rat == 10)
+	{
+		col ='#006603';
+	}
+	return col;
+
+}
+
+</script>
+
+</body>
+</html>

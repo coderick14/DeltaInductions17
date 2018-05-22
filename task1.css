@@ -1,0 +1,85 @@
+*{
+	margin: none;
+	padding: none;
+	border: none;
+}
+.body{
+	background-color: #aaa8ea;
+}
+.header{
+	background-color: #5164bc;
+	color: #f7d913;
+	text-shadow: 2px 2px 8px #FF0000;
+	text-align: center;
+	font-size: 100px;
+
+}
+.sort{
+	text-align: center;
+	padding-top: 0px;
+	float: right;
+	width: 50%;
+
+
+}
+.BtnSort{
+	font-size: 25px;
+	background-color: grey;
+	color: white;
+}
+.BtnSort:hover{
+	background-color: #c17ab5;
+
+}
+
+
+}
+.add{
+text-align: center;
+	padding-top: 20px;
+	float: right;
+	width: 50%;
+
+}
+.ManDat{
+	 border:5px solid blue; margin:none; padding:none;
+
+}
+.ManDat:hover{
+	background-color: yellow;
+}
+.EnDbtn{
+	background-color: #0c0000;
+	color: white;
+	box-sizing: 40px;
+	font-size: 30px;
+}
+.EnDbtn:hover{
+background-color: red;
+}
+.NamE{ float: left;
+	width: 50%;
+	box-sizing: 50%;
+
+}
+.RoLL{
+	float: right;
+	width: 50%;
+	box-sizing: 50%;
+
+}
+.CoMMent{
+	text-align: center;
+	padding-top: 50px;
+
+}
+.RAting{float: left;
+	width: 50%;
+	box-sizing: 50%;
+
+}
+.CN{float: right;
+	width: 50%;
+	box-sizing: 50%;
+
+}
