@@ -90,6 +90,7 @@ function updateGameArea() {
     }
     gameArea.clear();
     gameArea.frameNo += 1;
+    console.log(gameArea.frameNo);
     score.innerHTML="Score:" + deep.x;                               // display score
     if (gameArea.frameNo == 1 || wallInterval(25)) {
         x = gameArea.canvas.width;
@@ -104,7 +105,15 @@ function updateGameArea() {
         walls.push(new piece(10, y - height-gap, "#000099", x, height+gap));
     }
     for (i = 0; i < walls.length; i += 1) {
+        
+        if(gameArea.frameNo<500)                                                //add levels 
         walls[i].x += -5;
+        else if(gameArea.frameNo<1000)
+        walls[i].x += -7;
+        else if(gameArea.frameNo<1500)
+        walls[i].x += -9;
+        else
+        walls[i].x += -10;
         walls[i].update();
     }
     gameArea.canvas.addEventListener("mousemove",function(e){                    //check for mouse movement
