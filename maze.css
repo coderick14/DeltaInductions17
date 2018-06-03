@@ -1,0 +1,86 @@
+canvas{
+    background-color:#e0e0d1;
+    
+}
+html{
+    background-image: url("../images/maze.jpg");
+}
+body {
+color:#262626;
+    
+}
+
+#score {
+text-align: center;
+padding: 10px;
+font-family: helvetica;
+font-size: 25px;
+background: #262626;
+    color:white;
+opacity: 0.8;
+display: none;
+}
+
+
+
+
+#startWindow{
+
+height: 100%;
+width: 100%;
+top: 0;
+left: 0;
+position: absolute;
+font-family: helvetica;
+padding-top: 100px;
+}
+
+#newGameWindow{
+
+height: 100%;
+width: 100%;
+top: 0;
+left: 0;
+position: absolute;
+font-family: helvetica;
+padding-top: 100px;
+overflow: hidden;
+display: none;
+}
+
+
+.modalBox {
+margin: 0 auto;
+width: 500px;
+background: white;
+text-align: center;
+border: 2px solid whitesmoke;
+border-radius: 10px;
+padding: 20px;
+line-height: 1.5;
+}
+
+.modalBox h1,h2{
+font-size: 35px;
+text-align: center;
+font-weight: 100;
+}
+
+.modalBox p {
+font-size: 18px;
+text-align: center;
+font-weight: 100;
+padding: 20px 0;
+}
+
+.modalBox button {
+outline: none;
+padding: 15px;
+cursor: pointer;
+font-size: 18px;
+border-radius: 5px;
+background: #262626;
+border: 2px solid transparent;
+color: #fff;
+font-weight: 100;
+}
