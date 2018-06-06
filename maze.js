@@ -1,5 +1,6 @@
 var deep;
 var walls=[];
+var hitSound,endSound,gameSound;
 var startWindow = document.getElementById("startWindow");
 var newTestWindow = document.getElementById("newTestWindow");
 var newTestButton = document.getElementById("newTestButton");
@@ -12,7 +13,11 @@ function startGame() {
     score.innerHTML="Score:0";
     score.style.display = "block";                                            
     deep = new piece(0,20, "red", 40, 120);
+    hitSound= new sound("bang.mp3");
+    endSound=new sound("end.mp3");
+    gameSound=new sound("game.mp3")
     gameArea.start();
+    gameSound.play();
     }
 
 var gameArea = {
@@ -80,7 +85,10 @@ function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < walls.length; i += 1) {
         if (deep.hitWall(walls[i])) {
+            gameSound.stop();
+            hitSound.play();
             gameArea.stop();
+            endSound.play();
             gameArea.canvas.remove();
             score.style.display="none";
             
@@ -91,7 +99,7 @@ function updateGameArea() {
     gameArea.clear();
     gameArea.frameNo += 1;
     console.log(gameArea.frameNo);
-    score.innerHTML="Score:" + deep.x;                               // display score
+    score.innerHTML="Score:" + gameArea.frameNo;                               // display score
     if (gameArea.frameNo == 1 || wallInterval(25)) {
         x = gameArea.canvas.width;
         y= gameArea.canvas.height;
@@ -99,14 +107,13 @@ function updateGameArea() {
         maxHeight = 200;
         height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);    //generate random height
         minGap = 100;
-        maxGap = 200;
+        maxGap = 500;
         gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);                //generate random gap
         walls.push(new piece(10, height, "#000099", x, 0));
         walls.push(new piece(10, y - height-gap, "#000099", x, height+gap));
     }
     for (i = 0; i < walls.length; i += 1) {
-        
-        if(gameArea.frameNo<500)                                                //add levels 
+        if(gameArea.frameNo<500)
         walls[i].x += -5;
         else if(gameArea.frameNo<1000)
         walls[i].x += -7;
@@ -123,15 +130,28 @@ function updateGameArea() {
     deep.update();
 }
 
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }    
+}
+
 function wallInterval(n) {
     if ((gameArea.frameNo / n) % 1 == 0) {
         return true;}
     return false;
 }
 
-newGameButton.addEventListener("click", function(){                              //restart game
+newGameButton.addEventListener("click", function(){
+    endSound.stop();                              //restart game
     window.location.reload();
 });
-
- 
-
