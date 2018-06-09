@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">;
+</head>
+<body>
+<style>
+body{
+background-color:#CCCCFF;
+color:#ddd;
+font-family: Helvetica,Arial,sans-serif;
+}
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+   
+}
+</style>
+<br><br><br>
+<canvas id="mgame" width="500" height="250"></canvas>
+<script>
+var score=0;
+var xspace=500;
+var temp=[];
+var playposnx,playposny,disx,disy;
+var colsn='false';
+for(var k=0;k<5;k++)
+temp.push(250*Math.floor(100*Math.random())/100);
+
+function updcordinat(){
+for(var k=0;k<4;k++)
+temp[k]=temp[k+1];
+temp.pop();
+temp.push(250*Math.floor(100*Math.random())/100);
+xspace=100;
+}
+
+function checkcollsn(xline){
+for(var k=0;k<5;k++){
+disx=xline+k*100-playposnx;
+//console.log(disx);
+if(disx<8&&disx>-8){
+if(temp[k]<40){
+if(playposny>temp[k]+30)
+colsn='true';
+else{
+disy=temp[k]+30-playposny;
+if(Math.sqrt(disx*disx+disy*disy)<=7)
+colsn='true';
+} 
+} 
+else if(temp[k]>220){
+if(playposny<temp[k]-30)
+colsn='true';
+else{
+disy=playposny-temp[k]+30;
+if(Math.sqrt(disx*disx+disy*disy)<=7)
+colsn='true';
+}
+}
+else{
+if(playposny<temp[k]||playposny>temp[k]+40)
+colsn='true';
+else{
+disy=playposny-temp[k];
+if(Math.sqrt(disx*disx+disy*disy)<=7)
+colsn='true';
+disy=temp[k]+40-playposny;
+if(Math.sqrt(disx*disx+disy*disy)<=7)
+colsn='true';
+}
+}
+}
+}
+}
+
+
+function animate(){
+var x=document.getElementById("mgame");
+x.style.cursor="none";
+var y=x.getContext('2d');
+y.clearRect(0,0,500,250);
+y.beginPath();
+y.fillStyle="#0099FF";
+y.fillRect(0,0,500,250);
+var xline=xspace--;
+y.lineWidth="8";
+y.strokeStyle="red";
+for(var k=0;k<6;k++){
+if(temp[k]<40){
+y.moveTo(xline+k*100,temp[k]+30);
+y.lineTo(xline+k*100,250);
+}
+
+else if(temp[k]>220){
+y.moveTo(xline+k*100,0);
+y.lineTo(xline+k*100,temp[k]-30);
+}
+else{
+y.moveTo(xline+k*100,0);
+y.lineTo(xline+k*100,temp[k]);
+y.moveTo(xline+k*100,temp[k]+40);
+y.lineTo(xline+k*100,250);
+}
+}
+y.stroke();
+
+x.addEventListener('mousemove',function(e){
+var rect=x.getBoundingClientRect();
+playposnx=e.pageX-rect.left;
+playposny=e.pageY-rect.top;
+})
+
+y.moveTo(playposnx,playposny);
+y.lineWidth="1";
+y.arc(playposnx,playposny,7,0,7);
+y.fillStyle="yellow";
+y.fill();
+
+score++;
+
+y.stroke();
+checkcollsn(xline);
+
+if(xline==0)
+updcordinat();
+if(colsn=='false')
+window.requestAnimationFrame(animate);
+else{
+if(playposnx>250){
+y.fillRect(0,0,250,250);
+y.beginPath();
+y.fillStyle="yellow";
+y.font="30px Comic Sans MS";
+y.fillStyle="black";
+y.fillText("GAME OVER",10,100);
+y.fillText("SCORE:",20,150);
+y.fillText(Math.floor(score/10),150,150);
+y.font="10px Arial";
+y.strokeText("click again to restart the game",50,200)
+}
+else{
+y.fillRect(250,0,250,250);
+y.beginPath();
+y.fillStyle="yellow";
+y.font="30px Comic Sans MS";
+y.fillStyle="black";
+y.fillText("GAME OVER",260,100);
+y.fillText("SCORE:",280,150);
+y.fillText(Math.floor(score/20),410,150);
+y.font="10px Arial";
+y.strokeText("click again to restart the game",350,200)
+}
+console.log(score);
+colsn='false';
+xspace=500;
+score=0;
+x.addEventListener("click",animate,false);
+}
+}
+
+var x=document.getElementById("mgame");
+var y=x.getContext("2d");
+y.fillStyle="blue";
+y.fillRect(0,0,500,250);
+y.beginPath();
+y.font="30px Comic Sans MS";
+y.fillStyle="red";
+y.fillText("MAZE GAME",130,125);
+y.font="10px Arial";
+y.strokeText("click to start the game",180,170)
+x.addEventListener("click",animate,false);
+</script>
+
+</body>
+</html>
